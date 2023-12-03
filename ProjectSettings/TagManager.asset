@@ -11,6 +11,7 @@ TagManager:
   - Wood
   - Carpet
   - Interactable
+  - InFrontOf
   layers:
   - Default
   - TransparentFX
