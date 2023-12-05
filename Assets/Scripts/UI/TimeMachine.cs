@@ -114,17 +114,30 @@ public class TimeMachine : MonoBehaviour
         }
     }
 
-    IEnumerator Transition()
+    IEnumerator Transition(bool fade = true, int fadeSpeed = 1)
     {
-        for (float f = 0.1f; f >= 4; f -= 0f)
+        Color color = transitionScreen.color;
+        float fadeAmount;
+        if (fade)
         {
-            yield return new WaitForSeconds(0.02f);
-            Color colorTemp = transitionScreen.material.color;
-            colorTemp.a += 0.035f;
-            transitionScreen.material.color = colorTemp;
-
-
+            while (transitionScreen.color.a < 1)
+            {
+                fadeAmount = color.a + (fadeSpeed * Time.deltaTime);
+                color = new Color(color.r, color.g, color.b, fadeAmount);
+                transitionScreen.color = color;    
+            }
+            StartCoroutine(Transition(false));
+            yield return null;
         }
-        yield return null;
+        else
+        {
+            while(transitionScreen.color.a > 0)
+            {
+                fadeAmount = color.a - (fadeSpeed * Time.deltaTime);
+                color = new Color(color.r, color.g, color.b, fadeAmount);
+                transitionScreen.color = color;
+                yield return null;
+            }
+        }
     }
 }

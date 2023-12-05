@@ -386,19 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
   m_Name: WMVolumeGlobalFree
   m_EditorClassIdentifier: 
-  components:
-  - {fileID: 9192774692755601893}
-  - {fileID: 8660412198831500697}
-  - {fileID: -1694892147687252462}
-  - {fileID: -8663158468251385600}
-  - {fileID: 5934059709210391301}
-  - {fileID: -5903264509035830326}
-  - {fileID: -4833033344450374283}
-  - {fileID: 2775361076535915642}
-  - {fileID: 6269802042147660698}
-  - {fileID: 6381758734531454102}
-  - {fileID: -7303287273139019373}
-  - {fileID: -8613487529165268631}
+  components: []
 --- !u!114 &2775361076535915642
 MonoBehaviour:
   m_ObjectHideFlags: 3
