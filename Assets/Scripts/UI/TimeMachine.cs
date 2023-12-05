@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class TimeMachine : MonoBehaviour
 {
     public TextMeshProUGUI machineText;
+    public Image transitionScreen;
+    public GameObject interactIcon;
     private float delay = 0.05f;
     public string fullText;
     private string currentText = "";
@@ -15,12 +17,12 @@ public class TimeMachine : MonoBehaviour
     public string[] options;
     public GameObject[] timePeriods;
     private int selected;
-    public Image transitionScreen;
-
+    
     void Start()
     {
         selected = 1;
         SaySomething(options[selected]);
+        interactIcon.SetActive(false);
     }
 
     void Update()
@@ -35,6 +37,7 @@ public class TimeMachine : MonoBehaviour
 
         if (inRange)
         {
+            interactIcon.SetActive(true);
             if (Input.GetKeyDown("space"))
             {
                 Debug.Log("space");
@@ -69,6 +72,10 @@ public class TimeMachine : MonoBehaviour
                 }
                 SaySomething(options[selected]);
             }
+        }
+        else
+        {
+            interactIcon.SetActive(false);
         }
     }
 

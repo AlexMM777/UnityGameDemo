@@ -6,11 +6,10 @@ using UnityEngine.UI;
 public class ControlWorldScript : MonoBehaviour
 {
     public GameObject blackOutSquare;
-    public GameObject interactSymbol;
 
     void Start()
     {
-        interactSymbol.SetActive(false);
+
     }
 
     void Update()

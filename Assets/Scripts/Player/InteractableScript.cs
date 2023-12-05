@@ -27,7 +27,7 @@ public class InteractableScript : MonoBehaviour
 
         if (canInteract)
         {
-            control.interactSymbol.SetActive(true);
+            //control.interactSymbol.SetActive(true);
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Interact(interactChoice);
@@ -35,7 +35,7 @@ public class InteractableScript : MonoBehaviour
         }
         else if (!canInteract)
         {
-            control.interactSymbol.SetActive(false);
+            //control.interactSymbol.SetActive(false);
         }
     }
 
