@@ -5,7 +5,7 @@ using UnityEngine;
 public class PersonLookAtTarget : MonoBehaviour
 {
     public Transform target;
-    public Transform defaultTarget;
+    //public Transform defaultTarget;
 
     void Start()
     {

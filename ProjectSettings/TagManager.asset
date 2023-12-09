@@ -12,6 +12,7 @@ TagManager:
   - Carpet
   - Interactable
   - InFrontOf
+  - Gun
   layers:
   - Default
   - TransparentFX

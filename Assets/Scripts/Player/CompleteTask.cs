@@ -29,11 +29,12 @@ public class CompleteTask : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 task.isOn = true;
-                Destroy(this.gameObject);
-                if(enableObjWhenGet)
+                interactIcon.SetActive(false);
+                if (enableObjWhenGet)
                 {
                     obj.SetActive(true);
                 }
+                Destroy(this.gameObject);
             }
         }
         else

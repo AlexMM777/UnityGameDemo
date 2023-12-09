@@ -9,6 +9,8 @@ public class TimeMachine : MonoBehaviour
     public TextMeshProUGUI machineText;
     public Image transitionScreen;
     public GameObject interactIcon;
+    public AudioClip teleportAudioClip;
+    private AudioSource audioSource;
     private float delay = 0.05f;
     public string fullText;
     private string currentText = "";
@@ -23,6 +25,7 @@ public class TimeMachine : MonoBehaviour
         selected = 1;
         SaySomething(options[selected]);
         interactIcon.SetActive(false);
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -40,10 +43,10 @@ public class TimeMachine : MonoBehaviour
             interactIcon.SetActive(true);
             if (Input.GetKeyDown("space"))
             {
-                Debug.Log("space");
+                audioSource.PlayOneShot(teleportAudioClip);
+                StartCoroutine(Transition(true, 2f));
                 for (int i = 0; i < options.Length; i++)
                 {
-                    StartCoroutine(Transition());
                     if (i == selected)
                     {
                         timePeriods[i].SetActive(true);
@@ -83,7 +86,6 @@ public class TimeMachine : MonoBehaviour
     {
         if (!dialogueInUse)
         {
-
             fullText = thought;
             dialogueInUse = true;
             StartCoroutine(ShowText());
@@ -99,8 +101,6 @@ public class TimeMachine : MonoBehaviour
             machineText.text = currentText;
             yield return new WaitForSeconds(delay);
         }
-        //yield return new WaitForSeconds(1.3f);
-        //currentText = "";
         currentText = fullText;
         machineText.text = currentText;
         dialogueInUse = false;
@@ -121,7 +121,7 @@ public class TimeMachine : MonoBehaviour
         }
     }
 
-    IEnumerator Transition(bool fade = true, int fadeSpeed = 1)
+    IEnumerator Transition(bool fade, float fadeSpeed)
     {
         Color color = transitionScreen.color;
         float fadeAmount;
@@ -129,12 +129,12 @@ public class TimeMachine : MonoBehaviour
         {
             while (transitionScreen.color.a < 1)
             {
-                fadeAmount = color.a + (fadeSpeed * Time.deltaTime);
+                fadeAmount = transitionScreen.color.a + (fadeSpeed * Time.deltaTime);
                 color = new Color(color.r, color.g, color.b, fadeAmount);
-                transitionScreen.color = color;    
+                transitionScreen.color = color;
+                yield return null;
             }
-            StartCoroutine(Transition(false));
-            yield return null;
+            StartCoroutine(Transition(false, 0.5f));
         }
         else
         {
