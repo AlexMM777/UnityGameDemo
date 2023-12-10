@@ -13,6 +13,7 @@ TagManager:
   - Interactable
   - InFrontOf
   - Gun
+  - Catchable
   layers:
   - Default
   - TransparentFX

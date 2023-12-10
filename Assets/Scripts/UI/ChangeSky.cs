@@ -6,7 +6,7 @@ public class ChangeSky : MonoBehaviour
 {
     public Material skybox1;
 
-    void Start()
+    void OnEnable()
     {
         RenderSettings.skybox = skybox1;
     }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueScript : MonoBehaviour
 {
@@ -10,11 +11,24 @@ public class DialogueScript : MonoBehaviour
     private float delay = 0.05f;
     public string fullText;
     private string currentText = "";
-    private bool dialogueInUse;
+    public bool dialogueInUse;
+    public bool sayOnActivate = false;
+    public GameObject background;
 
     void Start()
     {
-        thoughtDialogue = this.GetComponent<TextMeshProUGUI>();
+        if (!sayOnActivate)
+        {
+            thoughtDialogue = this.GetComponent<TextMeshProUGUI>();
+        }
+    }
+
+    void OnEnable()
+    {
+        if(sayOnActivate)
+        {
+            ThinkSomething(fullText);
+        }
     }
 
     void Update()
@@ -32,11 +46,10 @@ public class DialogueScript : MonoBehaviour
     {
         if (!dialogueInUse)
         {
-
             fullText = thought;
             dialogueInUse = true;
+            background.SetActive(true);
             StartCoroutine(ShowText());
-
         }
     }
 
@@ -48,9 +61,10 @@ public class DialogueScript : MonoBehaviour
             thoughtDialogue.text = currentText;
             yield return new WaitForSeconds(delay);
         }
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(3f);
         currentText = "";
         thoughtDialogue.text = currentText;
+        background.SetActive(false);
         dialogueInUse = false;
     }
 }

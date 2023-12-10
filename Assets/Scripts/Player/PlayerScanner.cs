@@ -9,12 +9,14 @@ public class PlayerScanner : MonoBehaviour
     public Transform targetDefault, targetToCam, defaultArmLoc, upArmLoc;
     private bool isRightHolding, isLeftHolding;
     private GameObject[] guns;
+    public bool scanning;
 
 
     void Start()
     {
         isRightHolding = false;
         hasGun = false;
+        scanning = false;
     }
 
     void Update()
@@ -27,10 +29,12 @@ public class PlayerScanner : MonoBehaviour
             if (isLeftHolding)
             {
                 scanner.SetActive(true);
+                scanning = true;
             }
             else
             {
                 scanner.SetActive(false);
+                scanning = false;
             }
         }
         else

@@ -8,19 +8,19 @@ public class CompleteTask : MonoBehaviour
     private bool inRange;
     public Toggle task;
     public GameObject interactIcon;
-    public GameObject obj;
     public bool enableObjWhenGet;
+    public bool disableObjWhenGet;
+    public GameObject[] enableObjects;
+    public GameObject[] disableObjects;
 
     // Start is called before the first frame update
     void Start()
-    {
-        obj.gameObject.SetActive(false);
+    {   
         task.isOn = false;
         inRange = false;
         interactIcon.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (inRange)
@@ -32,7 +32,17 @@ public class CompleteTask : MonoBehaviour
                 interactIcon.SetActive(false);
                 if (enableObjWhenGet)
                 {
-                    obj.SetActive(true);
+                    foreach (GameObject item in enableObjects)
+                    {
+                        item.gameObject.SetActive(true);
+                    }
+                }
+                if(disableObjWhenGet)
+                {
+                    foreach (GameObject item in disableObjects)
+                    {
+                        item.gameObject.SetActive(false);
+                    }
                 }
                 Destroy(this.gameObject);
             }
