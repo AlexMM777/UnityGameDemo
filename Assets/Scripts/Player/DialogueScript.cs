@@ -61,7 +61,7 @@ public class DialogueScript : MonoBehaviour
             thoughtDialogue.text = currentText;
             yield return new WaitForSeconds(delay);
         }
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
         currentText = "";
         thoughtDialogue.text = currentText;
         background.SetActive(false);
