@@ -45,7 +45,7 @@ public class TimeMachine : MonoBehaviour
             {
                 audioSource.PlayOneShot(teleportAudioClip);
                 StartCoroutine(Transition(true, 2f));
-                for (int i = 0; i < options.Length; i++)
+                /*for (int i = 0; i < options.Length; i++)
                 {
                     if (i == selected)
                     {
@@ -55,7 +55,7 @@ public class TimeMachine : MonoBehaviour
                     {
                         timePeriods[i].SetActive(false);
                     }
-                }
+                }*/
             }
             if (Input.GetKeyDown("right"))
             {
@@ -133,6 +133,17 @@ public class TimeMachine : MonoBehaviour
                 color = new Color(color.r, color.g, color.b, fadeAmount);
                 transitionScreen.color = color;
                 yield return null;
+            } 
+            for (int i = 0; i < options.Length; i++)
+            {
+                if (i == selected)
+                {
+                    timePeriods[i].SetActive(true);
+                }
+                else
+                {
+                    timePeriods[i].SetActive(false);
+                }
             }
             StartCoroutine(Transition(false, 0.5f));
         }

@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpCooldown;
     public float airMultiplier;
     bool readyToJump;
+    public bool isPaused;
 
     [Header("- - KeyBinds - -")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -37,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         readyToJump = true;
+        isPaused = false;
     }
 
     private void Update()
@@ -91,27 +93,29 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        //calculate movement direction
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-        if (!isSprinting)
+        if (!isPaused)
         {
-            //on ground
-            if (grounded)
-                rb.AddForce(moveDirection.normalized * moveSpeed * 10f * 2f, ForceMode.Force);
-            //in air
-            else if (!grounded)
-                rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier * 2f, ForceMode.Force);
+            //calculate movement direction
+            moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+            if (!isSprinting)
+            {
+                //on ground
+                if (grounded)
+                    rb.AddForce(moveDirection.normalized * moveSpeed * 10f * 2f, ForceMode.Force);
+                //in air
+                else if (!grounded)
+                    rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier * 2f, ForceMode.Force);
+            }
+            else if (isSprinting)
+            {
+                //on ground
+                if (grounded)
+                    rb.AddForce(moveDirection.normalized * runningSpeed * 10f * 2f, ForceMode.Force);
+                //in air
+                else if (!grounded)
+                    rb.AddForce(moveDirection.normalized * runningSpeed * 10f * airMultiplier * 2f, ForceMode.Force);
+            }
         }
-        else if (isSprinting)
-        {
-            //on ground
-            if (grounded)
-                rb.AddForce(moveDirection.normalized * runningSpeed * 10f * 2f, ForceMode.Force);
-            //in air
-            else if (!grounded)
-                rb.AddForce(moveDirection.normalized * runningSpeed * 10f * airMultiplier * 2f, ForceMode.Force);
-        }
-        
     }
 
     private void SpeedControl()
