@@ -42,9 +42,11 @@ public class PlayerScanner : MonoBehaviour
             armHolder.GetComponent<PersonLookAtTarget>().target = targetDefault.transform;
             upperArm.transform.position = defaultArmLoc.position;
             upperArm.transform.rotation = defaultArmLoc.rotation;
+            scanner.SetActive(false);
+            scanning = false;
         }
 
-        if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1))
         {
             guns = GameObject.FindGameObjectsWithTag("Gun");
             foreach (GameObject gun in guns)
@@ -59,6 +61,7 @@ public class PlayerScanner : MonoBehaviour
         if (Input.GetMouseButtonUp(1))
         {
             isRightHolding = false;
+            isLeftHolding = false;
         }
 
         if (Input.GetMouseButtonDown(0))

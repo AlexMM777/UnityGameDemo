@@ -60,4 +60,9 @@ public class ControlPause : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         canPressKey = true;
     }
+
+    public void ExitPause()
+    {
+        isPaused = false;
+    }
 }

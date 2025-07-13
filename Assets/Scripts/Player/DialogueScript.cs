@@ -14,6 +14,7 @@ public class DialogueScript : MonoBehaviour
     public bool dialogueInUse;
     public bool sayOnActivate = false;
     public GameObject background;
+    public bool endedEarly;
 
     void Start()
     {
@@ -33,13 +34,15 @@ public class DialogueScript : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown("space"))
+        /*if (Input.GetKeyDown("space"))
         {
             fullText = "";
             currentText = "";
             thoughtDialogue.text = currentText;
+            background.SetActive(false);
             dialogueInUse = false;
-        }
+            endedEarly = true;
+        }*/
     }
 
     public void ThinkSomething(string thought)
@@ -61,10 +64,12 @@ public class DialogueScript : MonoBehaviour
             thoughtDialogue.text = currentText;
             yield return new WaitForSeconds(delay);
         }
+
         yield return new WaitForSeconds(4f);
         currentText = "";
         thoughtDialogue.text = currentText;
         background.SetActive(false);
         dialogueInUse = false;
+
     }
 }
